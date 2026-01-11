@@ -41,9 +41,8 @@ func (p *Parser) parse_conj() Expression {
 	if p.tokens[p.current_pos].token_type == TOK_OR {
 		p.current_pos++
 		e2 := p.parse_expr()
-		return &OrExpr {
-			lhs: e1,
-			rhs: e2,
+		return &OrListExpr {
+			exprs: []Expression{e1, e2},
 		}
 	}
 	return e1
@@ -58,9 +57,8 @@ func (p *Parser) parse_disj() Expression {
 	if p.tokens[p.current_pos].token_type == TOK_AND {
 		p.current_pos++
 		e2 := p.parse_expr()
-		return &AndExpr {
-			lhs: e1,
-			rhs: e2,
+		return &AndListExpr {
+			exprs: []Expression{e1, e2},
 		}
 	}
 	return e1
